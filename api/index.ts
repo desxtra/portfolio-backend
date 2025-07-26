@@ -10,7 +10,7 @@ app.use('*', cors())
 
 app.get('/', (c) => c.text('Hello from Hono.js!'))
 
-app.post('/api/contact', async (c) => {
+app.post('/api', async (c) => {
   const body  = await c.req.parseBody()
   const name = String((body as any).name)
   const email = String((body as any).email)
