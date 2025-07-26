@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { serve } from '@hono/node-server'
+import { handle } from 'hono/vercel'
 import nodemailer from 'nodemailer'
 import 'dotenv/config'
 
@@ -46,7 +46,5 @@ app.post('/api/contact', async (c) => {
   }
 })
 
-serve({
-  fetch: app.fetch,
-  port: 8787
-})
+export const GET = handle(app)
+export const POST = handle(app)
