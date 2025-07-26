@@ -11,8 +11,9 @@ app.use('*', cors())
 app.get('/', (c) => c.text('Hello from Hono.js!'))
 
 app.post('/api/contact', async (c) => {
-  const body = await c.req.parseBody()
-  const { name, email, message } = body
+  const name = String((body as any).name)
+  const email = String((body as any).email)
+  const message = String((body as any).message)
 
   console.log('EMAIL_USER:', process.env.EMAIL_USER)
   console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? ' Loaded' : 'Missing')
@@ -36,7 +37,7 @@ app.post('/api/contact', async (c) => {
     })
 
     console.log('Email sent from:', name)
-    return c.redirect('http://localhost:4321/thankyou')
+    return c.redirect('https://portfolio-plum-pi-12.vercel.app/thank-you')
 
   } catch (err) {
     console.error('Error sending email:', err)
