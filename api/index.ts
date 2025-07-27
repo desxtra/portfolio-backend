@@ -14,6 +14,10 @@ app.use('*', cors());
 app.get('/', (c) => c.text('Hello from Hono.js!'));
 
 app.post('/', async (c) => {
+  const userAgent = c.req.header('user-agent')
+  if (!userAgent || userAgent.includes('curl') || userAgent.includes('bot')) {
+    return c.json({ status: 'error', message: 'Access denied' }, 403);
+  }
   const body = await c.req.parseBody();
   const name = String(body.name);
   const email = String(body.email);
