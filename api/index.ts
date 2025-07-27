@@ -1,10 +1,16 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { handle } from 'hono/vercel'
+import { handle } from '@hono/node-server/vercel'
 import nodemailer from 'nodemailer'
 import 'dotenv/config'
 
-const app = new Hono()
+export const config = {
+  api: {
+    bodyParser: false
+  }
+}
+
+const app = new Hono().basePath('/api')
 
 app.use('*', cors())
 
@@ -39,5 +45,4 @@ app.post('/', async (c) => {
   }
 })
 
-export const GET = handle(app)
-export const POST = handle(app)
+export default  handle(app)
