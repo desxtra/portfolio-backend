@@ -38,7 +38,7 @@ app.post('/', async (c) => {
       text: message
     })
 
-    return c.redirect('https://portfolio-plum-pi-12.vercel.app/thank-you')
+    return c.json({ status: 'ok' })
   } catch (err) {
     console.error('Email send failed:', err)
     return c.json({ status: 'error', message: 'Failed to send email' }, 500)
