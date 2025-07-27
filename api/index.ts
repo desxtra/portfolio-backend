@@ -31,11 +31,11 @@ app.post('/', async (c) => {
     await transporter.sendMail({
       from: `"${name}" <${email}>`,
       to: process.env.EMAIL_TO,
-      subject: 'New message from portfolio',
+      subject: 'New message from Portfolio',
       text: message,
     });
 
-    return c.redirect('https://portfolio-plum-pi-12.vercel.app/thankyou');
+    return c.json({ status: 'ok', message: 'Email sent successfully'});
   } catch (err) {
     console.error('Email send failed:', err);
     return c.json({ status: 'error', message: 'Failed to send email' }, 500);
